@@ -1,0 +1,21 @@
+services:
+  base-devcontainer:
+    image: base-devcontainer-ubuntu-focal
+    container_name: base-devcontainer
+    user: "${UID:-501}:${GID:-20}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID:-501}
+        GID: ${GID:-20}
+        USERNAME: ${USERNAME:-developper}
+        GROUPNAME: ${GROUPNAME:-developper}
+        PASSWORD: ${PASSWORD:-password}
+    restart: always
+    hostname: base-devcontainer
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../workspace:/home/${USERNAME:-developper}/workspace
+

@@ -1,0 +1,21 @@
+services:
+  rust-devcontainer:
+    image: rust-devcontainer-ubuntu-focal
+    container_name: rust-devcontainer
+    user: "${UID:-501}:${GID:-20}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID:-501}
+        GID: ${GID:-20}
+        USERNAME: ${USERNAME:-rustacean}
+        GROUPNAME: ${GROUPNAME:-rustacean}
+        PASSWORD: ${PASSWORD:-password}
+    restart: always
+    hostname: rust-devcontainer
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../workspace:/home/${USERNAME:-rustacean}/workspace
+

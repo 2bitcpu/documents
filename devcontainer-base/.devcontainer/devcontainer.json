@@ -1,0 +1,7 @@
+{
+  "name": "Base Development Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "base-devcontainer",
+  "postStartCommand": "bash",
+  "workspaceFolder": "/home/developper/workspace",
+}

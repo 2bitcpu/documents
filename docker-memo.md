@@ -1,3 +1,4 @@
+```
 brew install docker docker-compose docker-buildx
 
 mkdir -p ~/.docker/cli-plugins
@@ -24,15 +25,6 @@ colima start --profile aarc64 --cpu 2 --memory 2 --disk 32
 colima start --profile x86_64 --arch x86_64 --cpu 2 --memory 2 --disk 32
 
 
-
-groupadd -o -g 20 -r rustacean
-
-useradd -m -s /bin/bash -u 501 -g 20 -G sudo rustacean
-
-echo rustacean:password | chpasswd
-
-echo "rustacean ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 export UID=$(id -u) && export GID=$(id -g) && docker-compose up -d
 
 docker stop $(docker ps -q) && docker rm $(docker ps -q -a) && docker rmi $(docker images -q)
@@ -51,6 +43,5 @@ docker system prune
 
 docker system df
 
-docker volume df
-
 docker volume rm $(docker volume ls -qf dangling=true)
+```

@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM rust:slim-bullseye
 
 ARG UID
 ARG GID
@@ -6,7 +6,18 @@ ARG USERNAME
 ARG GROUPNAME
 ARG PASSWORD
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y sudo git bash-completion tree vim curl wget build-essential && \
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+SHELL ["/bin/bash", "-c"]
+RUN apt-get update && \
+apt-get install -y sudo git bash-completion tree vim curl wget locales && \
+echo "LC_ALL=en_US.UTF-8" | tee -a /etc/environment && \
+echo "en_US.UTF-8 UTF-8" | tee -a /etc/locale.gen && \
+echo "LANG=en_US.UTF-8" | tee -a /etc/locale.conf && \
+locale-gen en_US.UTF-8 && \
+apt-get install -y upx && \
 apt-get autoclean && apt-get autoremove && \
 groupadd -o -g ${GID} -r ${GROUPNAME} && \
 useradd -m -s /bin/bash -u ${UID} -g ${GID} -G sudo ${USERNAME} && \
@@ -20,4 +31,4 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 SHELL ["/bin/bash", "-c"]
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && . ~/.cargo/env && rustup install nightly
+RUN rustup component add rustfmt && rustup install nightly && rustup component add rust-src --toolchain nightly

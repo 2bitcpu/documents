@@ -1,9 +1,11 @@
 {
   "name": "Rust Development Container",
-  "dockerComposeFile": "docker-compose.yml",
+  "dockerComposeFile": "compose.yml",
   "service": "rust-devcontainer",
   "postStartCommand": "bash",
   "workspaceFolder": "/home/rustacean/workspace",
+  "remoteUser": "rustacean",
+  "updateRemoteUserUID": falae,
 
   "customizations": {
     "vscode": {

@@ -1,7 +1,9 @@
 {
   "name": "Base Development Container",
-  "dockerComposeFile": "docker-compose.yml",
+  "dockerComposeFile": "compose.yml",
   "service": "base-devcontainer",
   "postStartCommand": "bash",
   "workspaceFolder": "/home/developper/workspace",
+  "remoteUser": "developper",
+  "updateRemoteUserUID": falae,
 }

@@ -1,15 +1,27 @@
-FROM ubuntu:20.04
+FROM debian:bullseye-slim
 
-ARG UID
-ARG GID
+ARG USERID
+ARG GROUPID
 ARG USERNAME
 ARG GROUPNAME
 ARG PASSWORD
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y sudo git bash-completion tree vim curl wget build-essential && \
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+SHELL ["/bin/bash", "-c"]
+RUN apt-get update && \
+apt-get install -y --no-install-recommends \
+sudo git bash-completion tree vim curl wget locales && \
+echo "LC_ALL=en_US.UTF-8" | tee -a /etc/environment && \
+echo "en_US.UTF-8 UTF-8" | tee -a /etc/locale.gen && \
+echo "LANG=en_US.UTF-8" | tee -a /etc/locale.conf && \
+locale-gen en_US.UTF-8 && \
+apt-get install -y upx && \
 apt-get autoclean && apt-get autoremove && \
-groupadd -o -g ${GID} -r ${GROUPNAME} && \
-useradd -m -s /bin/bash -u ${UID} -g ${GID} -G sudo ${USERNAME} && \
+groupadd -o -g ${GROUPID} -r ${GROUPNAME} && \
+useradd -m -s /bin/bash -u ${USERID} -g ${GROUPID} -G sudo ${USERNAME} && \
 echo ${USERNAME}:${PASSWORD} | chpasswd && \
 echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
 echo "source /usr/share/bash-completion/completions/git" >> /home/${USERNAME}/.bashrc && \
@@ -18,4 +30,3 @@ echo "PROMPT_COMMAND='PS1_CMD1=\$(__git_ps1 \" (%s)\")'; PS1='\[\e[38;5;40m\]\u@
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
-

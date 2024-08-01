@@ -1,14 +1,14 @@
 services:
   base-devcontainer:
-    image: base-devcontainer-ubuntu-focal
+    image: base-devcontainer-image
     container_name: base-devcontainer
-    user: "${UID:-501}:${GID:-20}"
+    user: "${USERID:-501}:${GROUPID:-20}"
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        UID: ${UID:-501}
-        GID: ${GID:-20}
+        USERID: ${USERID:-501}
+        GROUPID: ${GROUPID:-20}
         USERNAME: ${USERNAME:-developper}
         GROUPNAME: ${GROUPNAME:-developper}
         PASSWORD: ${PASSWORD:-password}
@@ -17,5 +17,6 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../workspace:/home/${USERNAME:-developper}/workspace
-
+      - type: bind
+        source: "../workspace"
+        target: "/home/${USERNAME:-developper}/workspace"

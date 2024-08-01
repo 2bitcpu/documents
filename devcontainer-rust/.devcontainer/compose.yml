@@ -2,13 +2,13 @@ services:
   rust-devcontainer:
     image: rust-devcontainer-image
     container_name: rust-devcontainer
-    user: "${UID:-501}:${GID:-20}"
+    user: "${USERID:-501}:${GROUPID:-20}"
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        UID: ${UID:-501}
-        GID: ${GID:-20}
+        USERID: ${USERID:-501}
+        GROUPID: ${GROUPID:-20}
         USERNAME: ${USERNAME:-rustacean}
         GROUPNAME: ${GROUPNAME:-rustacean}
         PASSWORD: ${PASSWORD:-password}
@@ -17,5 +17,6 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../workspace:/home/${USERNAME:-rustacean}/workspace
-
+      - type: bind
+        source: "../workspace"
+        target: "/home/${USERNAME:-rustacean}/workspace"

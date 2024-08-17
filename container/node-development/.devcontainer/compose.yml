@@ -1,0 +1,26 @@
+services:
+  node-development:
+    image: node-development-image
+    container_name: node-development
+    user: "${USERID:-501}:${GROUPID:-20}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USERID: ${USERID:-501}
+        GROUPID: ${GROUPID:-20}
+        USERNAME: ${USERNAME:-developper}
+        GROUPNAME: ${GROUPNAME:-developper}
+        PASSWORD: ${PASSWORD:-password}
+    restart: always
+    hostname: node-container
+    stdin_open: true
+    tty: true
+    ports:
+      - '5173:5173'
+      - '3000:3000'
+      - '24678:24678'
+    volumes:
+      - type: bind
+        source: "../workspace"
+        target: "/home/${USERNAME:-developper}/workspace"

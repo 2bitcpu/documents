@@ -1,7 +1,7 @@
 {
   "name": "Rust Development Container",
   "dockerComposeFile": "compose.yml",
-  "service": "rust-devcontainer",
+  "service": "rust-development",
   "postStartCommand": "bash",
   "workspaceFolder": "/home/rustacean/workspace",
   "remoteUser": "rustacean",

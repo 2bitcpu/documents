@@ -1,0 +1,9 @@
+{
+  "name": "Node Development Container",
+  "dockerComposeFile": "compose.yml",
+  "service": "node-development",
+  "postStartCommand": "bash",
+  "workspaceFolder": "/home/developper/workspace",
+  "remoteUser": "developper",
+  "updateRemoteUserUID": falae,
+}

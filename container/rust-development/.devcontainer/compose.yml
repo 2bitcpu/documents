@@ -1,7 +1,7 @@
 services:
-  rust-devcontainer:
-    image: rust-devcontainer-image
-    container_name: rust-devcontainer
+  rust-development:
+#    image: rust-devcontainer-image
+    container_name: rust-development
     user: "${USERID:-501}:${GROUPID:-20}"
     build:
       context: .

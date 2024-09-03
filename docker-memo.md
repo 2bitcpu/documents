@@ -45,3 +45,8 @@ docker system df
 
 docker volume rm $(docker volume ls -qf dangling=true)
 ```
+
+```bash
+mkdir -p ./public_html
+docker run --rm --name nginx-dev -d -p 8080:80 --mount type=bind,source="$(pwd)"/public_html,target=/usr/share/nginx/html nginx:latest
+```

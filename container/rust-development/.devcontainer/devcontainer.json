@@ -5,12 +5,12 @@
   "postStartCommand": "bash",
   "workspaceFolder": "/home/rustacean/workspace",
   "remoteUser": "rustacean",
-  "updateRemoteUserUID": falae,
+  "updateRemoteUserUID": false,
 
   "customizations": {
     "vscode": {
       "extensions": [
-        "rust-lang.rust-analyzer",  // Rust Analyzer: Rust Language Server
+        "rust-lang.rust-analyzer"  // Rust Analyzer: Rust Language Server
       ]
     }
   }

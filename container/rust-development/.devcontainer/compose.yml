@@ -1,21 +1,25 @@
 services:
   rust-development:
-#    image: rust-devcontainer-image
-    container_name: rust-development
-    user: "${USERID:-501}:${GROUPID:-20}"
+    container_name: rust-dev
+    image: rust-dev-img
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.1.79
       args:
         USERID: ${USERID:-501}
         GROUPID: ${GROUPID:-20}
         USERNAME: ${USERNAME:-rustacean}
         GROUPNAME: ${GROUPNAME:-rustacean}
         PASSWORD: ${PASSWORD:-password}
-    restart: always
-    hostname: rust-devcontainer
+    user: "${USERID:-501}:${GROUPID:-20}"
+    restart: no
+    hostname: rust-dev
     stdin_open: true
     tty: true
+#    ports:
+#      - '5173:5173'
+#      - '3000:3000'
+#      - '24678:24678'
     volumes:
       - type: bind
         source: "../workspace"

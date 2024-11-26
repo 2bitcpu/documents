@@ -1,4 +1,4 @@
-FROM rust:slim-bullseye
+FROM ubuntu:jammy
 
 ARG USERID
 ARG GROUPID
@@ -16,8 +16,8 @@ apt-get install -y --no-install-recommends \
 tzdata sudo bash-completion bash git ca-certificates vim curl wget && \
 ln -fs /usr/share/zoneinfo/$TZ /etc/localtime && \
 dpkg-reconfigure --frontend noninteractive tzdata && \
+apt-get install -y --no-install-recommends build-essential upx && \
 apt-get clean && \
-rm -rf /var/lib/apt/lists/* && \
 groupadd -o -g ${GROUPID} -r ${GROUPNAME} && \
 useradd -m -s /bin/bash -u ${USERID} -g ${GROUPID} -G sudo ${USERNAME} && \
 echo ${USERNAME}:${PASSWORD} | chpasswd && \
@@ -30,5 +30,12 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 SHELL ["/bin/bash", "-c"]
-RUN rustup component add rustfmt && rustup install nightly-2024-06-13 && rustup component add rust-src --toolchain nightly-2024-06-13 && \
-rustup target add wasm32-unknown-unknown
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+source /home/${USERNAME}/.cargo/env && \
+rustup component add rustfmt && \
+rustup install nightly && \
+rustup component add rust-src --toolchain nightly && \
+cargo install wasm-pack && \
+rustup target add wasm32-unknown-unknown && \
+sudo rm -rf /var/lib/apt/lists/*

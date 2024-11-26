@@ -4,7 +4,7 @@ services:
     image: rust-dev-img
     build:
       context: .
-      dockerfile: Dockerfile.1.79
+      dockerfile: Dockerfile
       args:
         USERID: ${USERID:-501}
         GROUPID: ${GROUPID:-20}
@@ -16,10 +16,6 @@ services:
     hostname: rust-dev
     stdin_open: true
     tty: true
-#    ports:
-#      - '5173:5173'
-#      - '3000:3000'
-#      - '24678:24678'
     volumes:
       - type: bind
         source: "../workspace"

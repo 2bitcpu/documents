@@ -8,6 +8,8 @@ cargo add serde_json --no-default-features --features std
 cargo add async-sqlite --no-default-features
 ```
 
+https://github.com/tokio-rs/axum/blob/main/examples/error-handling/src/main.rs
+
 ```rust
 use axum::{
     extract::{rejection::JsonRejection, FromRequest, MatchedPath, Path, Request, State},

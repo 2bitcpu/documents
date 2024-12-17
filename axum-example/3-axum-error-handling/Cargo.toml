@@ -1,0 +1,12 @@
+[package]
+name = "axum-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.83"
+axum = { version = "0.7.9", features = ["macros"] }
+serde = { version = "1.0.216", features = ["derive"], default-features = false }
+serde_json = { version = "1.0.133", default-features = false, features = ["std"] }
+tokio = { version = "1.42.0", default-features = false, features = ["macros", "rt-multi-thread"] }
+tower = { version = "0.5.2", default-features = false, features = ["timeout"] }

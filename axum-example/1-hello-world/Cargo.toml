@@ -1,0 +1,20 @@
+[package]
+name = "axum-hello"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7.9"
+serde_json = { version = "1.0.133", default-features = false, features = ["std"] }
+tokio = { version = "1.42.0", default-features = false, features = ["macros", "rt-multi-thread"] }
+
+[profile.release]
+opt-level = "z"
+debug = false
+lto = true
+strip = true
+codegen-units = 1
+panic = "abort"
+
+# cargo +nightly-2024-10-17 build -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort --target aarch64-unknown-linux-gnu --release
+# upx --best --lzma ./target/aarch64-unknown-linux-gnu/release/axum-hello

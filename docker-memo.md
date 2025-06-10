@@ -3,22 +3,25 @@ brew install docker docker-compose docker-buildx
 
 mkdir -p ~/.docker/cli-plugins
 
-ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
 ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
 docker buildx install
 
 brew install colima
 
-~ % sw_vers
+$ sw_vers
 ProductName:            macOS
-ProductVersion:         14.5
-BuildVersion:
+ProductVersion:         15.5
+BuildVersion:           24F74
 
-~ % colima --version
-colima version 0.6.10
+$ colima --version
+colima version 0.8.1
 
-~ % docker --version
-Docker version 27.1.1, build 63125853e3
+$ docker --version
+Docker version 28.2.2, build e6534b4eb7
+
+$ docker compose version
+Docker Compose version 2.37.0
 
 colima start --profile aarc64 --cpu 2 --memory 2 --disk 32
 

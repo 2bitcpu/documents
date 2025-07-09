@@ -1,26 +1,41 @@
-```
-mkdir html
-mkdir conf.d
-mkdir log
+# nginxをサクッと試す
+
+#### 下記の環境にて検証しています
+
+```bash
+$ sw_vers
+ProductName:            macOS
+ProductVersion:         15.5
+BuildVersion:           24F74
+$ colima --version
+colima version 0.8.1
+$ docker -v
+Docker version 28.3.0, build 38b7060a21
 ```
 
 ```
-docker run -d -it --rm --name nginx-local -p 8765:80 nginx:alpine
+mkdir -p html
+mkdir -p conf.d
+mkdir -p log
 ```
 
 ```
-docker run -d -it --rm --name nginx-local --mount type=bind,source="$(pwd)/html",target=/usr/share/nginx/html -p 8765:80 nginx:alpine
+docker run -d --rm --name nginx-local -p 8765:80 nginx:alpine
 ```
 
 ```
-docker run -d -it --rm --name nginx-local \
+docker run -d --rm --name nginx-local --mount type=bind,source="$(pwd)/html",target=/usr/share/nginx/html -p 8765:80 nginx:alpine
+```
+
+```
+docker run -d --rm --name nginx-local \
 --mount type=bind,source="$(pwd)/html",target=/usr/share/nginx/html \
 --mount type=bind,source="$(pwd)/conf.d",target=/etc/nginx/conf.d \
 -p 8765:80 nginx:alpine
 ```
 
 ```
-docker run -d -it --rm --name nginx-local \
+docker run -d --rm --name nginx-local \
 --mount type=bind,source="$(pwd)/html",target=/usr/share/nginx/html \
 --mount type=bind,source="$(pwd)/conf.d",target=/etc/nginx/conf.d \
 --mount type=bind,source="$(pwd)/log",target=/var/log/nginx \

@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 `sec/css/style.css` の内容は変わりません
 
-ここまでで構成は下記になります
+使わないファイルを削除して、構成は下記になります
 ```
 .
 ├── node_modules

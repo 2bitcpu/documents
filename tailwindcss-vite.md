@@ -95,7 +95,7 @@ VSCodeのターミナルで
 npm run dev
 ```
 ```
-> tailwind-vite-test@0.0.0 dev
+> tailwind-vite@0.0.0 dev
 > vite
 
 

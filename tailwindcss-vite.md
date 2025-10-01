@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 ```
 
-`sec/css/style.css` の内容は変わりません
+`src/css/style.css` の内容は変わりません
 
 使わないファイルを削除して、構成は下記になります
 ```

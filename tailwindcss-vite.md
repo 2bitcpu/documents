@@ -135,7 +135,6 @@ npm run dev
 ```
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
-import VitePluginClean from 'vite-plugin-clean';
 
 export default defineConfig({
     server: {
@@ -148,6 +147,7 @@ export default defineConfig({
     root: 'src',
     build: {
         outDir: '../dist',
+        emptyOutDir: true,
         rollupOptions: {
             input: {
                 main: 'src/index.html',

@@ -149,11 +149,11 @@ export default defineConfig({
         outDir: '../dist',
         emptyOutDir: true,
         rollupOptions: {
-            input: {
-                main: 'src/index.html',
-                list: 'src/list.html',
-                search: 'src/search.html',
-            },
+            input: [
+                'src/index.html',
+                'src/list.html',
+                'src/search.html',
+            ],
             output: {
                 entryFileNames: `js/[name].js`,
                 chunkFileNames: `js/[name].js`,

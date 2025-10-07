@@ -12,21 +12,21 @@
 
 1.  **Dockerイメージをビルドします。**
 
-    ```bash
-    docker build -t lindera-dict-builder .
-    ```
+```bash
+docker build -t lindera-dict-builder .
+```
 
 2.  **辞書ビルドスクリプトを実行します。**
 
     以下のコマンドは、`work`ディレクトリを作成し、その中で辞書ビルド処理を実行します。
 
-    ```bash
-    rm -rf ./work
-    mkdir ./work
-    cp ./build-dic.sh ./work/build-dic.sh
+```bash
+rm -rf ./work
+mkdir ./work
+cp ./build-dic.sh ./work/build-dic.sh
 
-    docker run --rm -v $(pwd)/work:/work lindera-dict-builder bash /work/build-dic.sh
-    ```
+docker run --rm -v $(pwd)/work:/work lindera-dict-builder bash /work/build-dic.sh
+```
 
 ## ビルド成果物
 
